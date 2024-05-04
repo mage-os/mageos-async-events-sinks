@@ -1,0 +1,19 @@
+{
+    "name": "mage-os/mageos-async-events-aws",
+    "require": {
+        "php": "^8.1",
+        "aws/aws-sdk-php": "^3.305",
+        "mage-os/mageos-async-events": "^4.0@beta"
+    },
+    "autoload": {
+        "psr-4": {
+            "MageOS\\AsyncEventsAWS\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "4.x-dev"
+        }
+    },
+    "minimum-stability": "beta"
+}
