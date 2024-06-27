@@ -42,4 +42,4 @@ curl --location --request POST 'https://test.mageos.dev/rest/V1/async_event' \
 ## Contributing
 
 This is a repository for distribution only.
-Contributions are welcome on the development repository [mageos-async-events-sink](https://github.com/mage-os/mageos-async-events-sinks)
+Contributions are welcome on the development repository [mageos-async-events-sinks](https://github.com/mage-os/mageos-async-events-sinks)
