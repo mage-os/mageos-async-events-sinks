@@ -4,6 +4,7 @@
         <arguments>
             <argument name="notifierClasses" xsi:type="array">
                 <item name="eventbridge" xsi:type="object">MageOS\AsyncEventsAWS\Service\EventBridge</item>
+                <item name="sqs" xsi:type="object">MageOS\AsyncEventsAWS\Service\SQS</item>
             </argument>
         </arguments>
     </type>

@@ -28,6 +28,23 @@
                     <comment><![CDATA[Default: store's host name. Example: store.com]]></comment>
                 </field>
             </group>
+
+            <group id="sqs" translate="label" type="text" sortOrder="2" showInDefault="1">
+                <label>SQS</label>
+                <field id="access_key" type="text" sortOrder="1" showInDefault="1">
+                    <label>Access Key</label>
+                </field>
+
+                <field id="secret_access_key" type="obscure" sortOrder="2" showInDefault="1">
+                    <label>Secret Access Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+
+                <field id="region" type="text" sortOrder="3" showInDefault="1">
+                    <label>Region</label>
+                    <comment><![CDATA[Default: 'us-east-1']]></comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>
