@@ -11,6 +11,7 @@ composer require mage-os/mageos-async-events-aws
 ## Supported AWS event sinks
 
 * EventBridge: send events to an Amazon EventBridge bus
+* SQS: send events to an AWS SQS queue
 
 ### Configure AWS Credentials
 

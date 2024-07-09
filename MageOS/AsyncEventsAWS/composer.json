@@ -1,9 +1,10 @@
 {
     "name": "mage-os/mageos-async-events-aws",
     "description": "AWS event sinks for mage-os/mageos-async-events",
+    "type": "magento2-module",
     "require": {
         "php": ">=8.1",
-        "aws/aws-sdk-php": "^3.305",
+        "aws/aws-sdk-php": "^3.0",
         "mage-os/mageos-async-events": "^4.0"
     },
     "license": [
