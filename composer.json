@@ -2,8 +2,7 @@
     "name": "mage-os/async-event-sinks",
     "require": {
         "aws/aws-sdk-php": "^3.0",
-        "google/cloud-eventarc-publishing": "^0.6.3",
-        "google/cloud-pubsub": "^2.1",
+        "google/cloud-pubsub": "^2.0",
         "mage-os/mageos-async-events": "^4.0",
         "php": ">=8.1"
     },
@@ -31,6 +30,5 @@
     },
     "require-dev": {
         "symplify/monorepo-builder": "^11.2"
-    },
-    "minimum-stability": "beta"
+    }
 }

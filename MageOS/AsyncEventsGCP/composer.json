@@ -5,8 +5,7 @@
     "require": {
         "php": ">=8.1",
         "mage-os/mageos-async-events": "^4.0",
-        "google/cloud-pubsub": "^2.1",
-        "google/cloud-eventarc-publishing": "^0.6.3"
+        "google/cloud-pubsub": "^2.0"
     },
     "license": [
         "MIT"
