@@ -67,6 +67,7 @@ class Config
         if ($source == null) {
             $url = $this->storeManager->getStore()->getBaseUrl();
             if ($url !== null) {
+                // phpcs:disable Magento2.Functions.DiscouragedFunction.Discouraged
                 return parse_url($url, PHP_URL_HOST);
             }
         }
