@@ -9,13 +9,13 @@ use CloudEvents\Serializers\Normalizers\V1\Normalizer;
 use CloudEvents\V1\CloudEventImmutable;
 use Exception;
 use Google\Cloud\PubSub\PubSubClient;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use MageOS\AsyncEvents\Api\Data\AsyncEventInterface;
 use MageOS\AsyncEvents\Api\Data\ResultInterface;
 use MageOS\AsyncEvents\Helper\NotifierResult;
 use MageOS\AsyncEvents\Helper\NotifierResultFactory;
 use MageOS\AsyncEvents\Service\AsyncEvent\NotifierInterface;
+use MageOS\AsyncEventsGCP\Model\PubSubConfig;
 
 class PubSub implements NotifierInterface
 {
@@ -24,7 +24,7 @@ class PubSub implements NotifierInterface
         private readonly NotifierResultFactory $notifierResultFactory,
         private readonly Normalizer $normalizer,
         private readonly SerializerInterface $serializer,
-        private readonly ScopeConfigInterface $scopeConfig
+        private readonly PubSubConfig $pubSubConfig
     ) {
     }
 
@@ -39,7 +39,7 @@ class PubSub implements NotifierInterface
 
         try {
             $pubSub = new PubSubClient([
-                'credentials' => $this->scopeConfig->getValue('async_events_gcp/pubsub/adc_path')
+                'credentials' => $this->pubSubConfig->getAdcPath()
             ]);
 
             $topic = $pubSub->topic($asyncEvent->getRecipientUrl());
