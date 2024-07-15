@@ -7,7 +7,9 @@ namespace MageOS\AsyncEventsGCP\Service;
 use CloudEvents\Serializers\JsonSerializer;
 use CloudEvents\Serializers\Normalizers\V1\Normalizer;
 use CloudEvents\V1\CloudEventImmutable;
+use Exception;
 use Google\Cloud\PubSub\PubSubClient;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use MageOS\AsyncEvents\Api\Data\AsyncEventInterface;
 use MageOS\AsyncEvents\Api\Data\ResultInterface;
@@ -17,10 +19,12 @@ use MageOS\AsyncEvents\Service\AsyncEvent\NotifierInterface;
 
 class PubSub implements NotifierInterface
 {
+
     public function __construct(
         private readonly NotifierResultFactory $notifierResultFactory,
         private readonly Normalizer $normalizer,
-        private readonly SerializerInterface $serializer
+        private readonly SerializerInterface $serializer,
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
 
@@ -33,16 +37,24 @@ class PubSub implements NotifierInterface
         $result->setIsSuccessful(false);
         $result->setIsRetryable(false);
 
-        $pubSub = new PubSubClient();
-        $topic = $pubSub->topic('gowri-test-topic');
+        try {
+            $pubSub = new PubSubClient([
+                'credentials' => $this->scopeConfig->getValue('async_events_gcp/pubsub/adc_path')
+            ]);
 
-        $messages = $topic->publish([
-            'data' => JsonSerializer::create()->serializeStructured($event)
-        ]);
+            $topic = $pubSub->topic($asyncEvent->getRecipientUrl());
 
-        $result->setIsSuccessful(true);
-        $result->setResponseData($this->serializer->serialize($messages));
+            $messages = $topic->publish([
+                'data' => JsonSerializer::create()->serializeStructured($event)
+            ]);
 
+            $result->setIsSuccessful(true);
+            $result->setResponseData($this->serializer->serialize($messages));
+        } catch (Exception $exception) {
+            $result->setIsSuccessful(false);
+            $result->setIsRetryable(false);
+            $result->setResponseData($this->serializer->serialize($exception->getMessage()));
+        }
 
         return $result;
     }

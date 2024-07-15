@@ -9,7 +9,7 @@
 
             <group id="pubsub" translate="label" type="text" sortOrder="1" showInDefault="1">
                 <label>Pub/Sub</label>
-                <field id="access_key" type="text" sortOrder="1" showInDefault="1">
+                <field id="adc_path" type="text" sortOrder="1" showInDefault="1">
                     <label>ADC Path</label>
                 </field>
             </group>
