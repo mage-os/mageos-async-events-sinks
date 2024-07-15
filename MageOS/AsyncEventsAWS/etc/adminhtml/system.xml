@@ -7,13 +7,15 @@
             <tab>service</tab>
             <resource>Magento_Webapi::config_webapi</resource>
 
-            <group id="eventbridge" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="eventbridge" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
                 <label>EventBridge</label>
                 <field id="access_key" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Access Key</label>
                 </field>
 
-                <field id="secret_access_key" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="secret_access_key" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
                     <label>Secret Access Key</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>

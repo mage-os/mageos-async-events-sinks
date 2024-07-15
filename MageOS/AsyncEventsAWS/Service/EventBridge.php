@@ -18,6 +18,7 @@ use MageOS\AsyncEventsAWS\Model\Config as EventBridgeConfig;
 
 class EventBridge implements NotifierInterface
 {
+    /** @var EventBridgeClient|null */
     private ?EventBridgeClient $eventBridgeClient = null;
 
     /**
@@ -31,7 +32,6 @@ class EventBridge implements NotifierInterface
         private readonly Normalizer $normalizer,
         private readonly EncryptorInterface $encryptor,
         private readonly SerializerInterface $serializer,
-
     ) {
     }
 

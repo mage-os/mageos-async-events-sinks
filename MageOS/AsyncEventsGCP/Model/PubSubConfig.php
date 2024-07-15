@@ -6,8 +6,8 @@ namespace MageOS\AsyncEventsGCP\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
-class PubSubConfig {
-
+class PubSubConfig
+{
     private const XML_PATH_GCP_ADC_PATH = 'async_events_gcp/pubsub/adc_path';
 
     /**

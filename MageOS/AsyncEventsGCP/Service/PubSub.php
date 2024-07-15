@@ -19,7 +19,12 @@ use MageOS\AsyncEventsGCP\Model\PubSubConfig;
 
 class PubSub implements NotifierInterface
 {
-
+    /**
+     * @param NotifierResultFactory $notifierResultFactory
+     * @param Normalizer $normalizer
+     * @param SerializerInterface $serializer
+     * @param PubSubConfig $pubSubConfig
+     */
     public function __construct(
         private readonly NotifierResultFactory $notifierResultFactory,
         private readonly Normalizer $normalizer,
@@ -28,6 +33,9 @@ class PubSub implements NotifierInterface
     ) {
     }
 
+    /**
+     * @inheritDoc
+     */
     public function notify(AsyncEventInterface $asyncEvent, CloudEventImmutable $event): ResultInterface
     {
         /** @var NotifierResult $result */

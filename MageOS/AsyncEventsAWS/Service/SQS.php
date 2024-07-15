@@ -19,8 +19,9 @@ use MageOS\AsyncEvents\Helper\NotifierResultFactory;
 use MageOS\AsyncEvents\Service\AsyncEvent\NotifierInterface;
 use MageOS\AsyncEventsAWS\Model\SQSConfig;
 
-class SQS implements NotifierInterface {
-
+class SQS implements NotifierInterface
+{
+    /** @var SqsClient|null */
     private ?SqsClient $sqsClient = null;
 
     /**
@@ -111,7 +112,7 @@ class SQS implements NotifierInterface {
             $key = $this->config->getAccessKey();
             $secret = $this->config->getSecretAccessKey();
 
-            if (!is_null($key) && !is_null($secret)) {
+            if ($key !== null && $secret !== null) {
 
                 $this->sqsClient = new SqsClient([
                     'region' => $region,
