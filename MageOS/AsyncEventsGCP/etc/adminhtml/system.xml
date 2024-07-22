@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="async_events_gcp" showInDefault="1">
+            <label>Async Events GCP</label>
+            <tab>service</tab>
+            <resource>Magento_Webapi::config_webapi</resource>
+
+            <group id="pubsub" translate="label" type="text" sortOrder="1" showInDefault="1">
+                <label>Pub/Sub</label>
+                <field id="adc_path" type="text" sortOrder="1" showInDefault="1">
+                    <label>ADC Path</label>
+                    <comment><![CDATA[The absolute path to the Application Default Credentials json file. e.g: /var/www/html/gcp-adc.json]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -8,3 +8,4 @@ instructions please refer to the individual package's repository.
 ### AWS
 [mageos-async-events-aws](https://github.com/mage-os/mageos-async-events-aws)
 * EventBridge
+* SQS

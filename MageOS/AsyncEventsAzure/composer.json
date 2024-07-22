@@ -1,10 +1,18 @@
 {
     "name": "mage-os/mageos-async-events-azure",
+    "description": "Azure event sinks for mage-os/mageos-async-events",
+    "type": "magento2-module",
     "require": {
-        "php": "^8.1",
-        "mage-os/mageos-async-events": "^4.0@beta"
+        "php": ">=8.1",
+        "mage-os/mageos-async-events": "^4.0"
     },
+    "license": [
+        "MIT"
+    ],
     "autoload": {
+        "files": [
+            "registration.php"
+        ],
         "psr-4": {
             "MageOS\\AsyncEventsAzure\\": ""
         }
@@ -13,6 +21,5 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         }
-    },
-    "minimum-stability": "beta"
+    }
 }

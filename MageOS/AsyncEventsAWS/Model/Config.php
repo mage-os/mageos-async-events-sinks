@@ -10,14 +10,12 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class Config
 {
-    const XML_PATH_AWS_ACCESS_KEY = 'async_events_aws/eventbridge/access_key';
-    const XML_PATH_AWS_SECRET_ACCESS_KEY = 'async_events_aws/eventbridge/secret_access_key';
-    const XML_PATH_AWS_REGION = 'async_events_aws/eventbridge/region';
-    const XML_PATH_EVENT_SOURCE = 'async_events_aws/eventbridge/source';
+    private const XML_PATH_AWS_ACCESS_KEY = 'async_events_aws/eventbridge/access_key';
+    private const XML_PATH_AWS_SECRET_ACCESS_KEY = 'async_events_aws/eventbridge/secret_access_key';
+    private const XML_PATH_AWS_REGION = 'async_events_aws/eventbridge/region';
+    private const XML_PATH_EVENT_SOURCE = 'async_events_aws/eventbridge/source';
 
     /**
-     * Config constructor.
-     *
      * @param StoreManagerInterface $storeManager
      * @param ScopeConfigInterface $scopeConfig
      */
@@ -27,27 +25,49 @@ class Config
     ) {
     }
 
-    public function getAccessKey()
+    /**
+     * Get Access Key
+     *
+     * @return string|null
+     */
+    public function getAccessKey(): ?string
     {
         return $this->scopeConfig->getValue(self::XML_PATH_AWS_ACCESS_KEY, ScopeInterface::SCOPE_STORES);
     }
 
-    public function getSecretAccessKey()
+    /**
+     * Get Secret Access Key
+     *
+     * @return string|null
+     */
+    public function getSecretAccessKey(): ?string
     {
         return $this->scopeConfig->getValue(self::XML_PATH_AWS_SECRET_ACCESS_KEY, ScopeInterface::SCOPE_STORES);
     }
 
-    public function getRegion()
+    /**
+     * Get AWS region
+     *
+     * @return string|null
+     */
+    public function getRegion(): ?string
     {
         return $this->scopeConfig->getValue(self::XML_PATH_AWS_REGION, ScopeInterface::SCOPE_STORES);
     }
 
-    public function getSource()
+    /**
+     * Get source for EventBridge
+     *
+     * @return string|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSource(): ?string
     {
         $source = $this->scopeConfig->getValue(self::XML_PATH_EVENT_SOURCE, ScopeInterface::SCOPE_STORES);
         if ($source == null) {
             $url = $this->storeManager->getStore()->getBaseUrl();
             if ($url !== null) {
+                // phpcs:disable Magento2.Functions.DiscouragedFunction.Discouraged
                 return parse_url($url, PHP_URL_HOST);
             }
         }

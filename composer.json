@@ -1,13 +1,21 @@
 {
     "name": "mage-os/async-event-sinks",
     "require": {
-        "aws/aws-sdk-php": "^3.305",
-        "google/cloud-eventarc-publishing": "^0.6.3",
-        "google/cloud-pubsub": "^2.1",
-        "mage-os/mageos-async-events": "^4.0@beta",
-        "php": "^8.1"
+        "aws/aws-sdk-php": "^3.0",
+        "google/cloud-pubsub": "^2.0",
+        "mage-os/mageos-async-events": "^4.0",
+        "php": ">=8.1"
     },
+    "license": [
+        "MIT"
+    ],
+    "type": "magento2-module",
     "autoload": {
+        "files": [
+            "MageOS/AsyncEventsAWS/registration.php",
+            "MageOS/AsyncEventsAzure/registration.php",
+            "MageOS/AsyncEventsGCP/registration.php"
+        ],
         "psr-4": {
             "MageOS\\AsyncEventsAWS\\": "MageOS/AsyncEventsAWS/",
             "MageOS\\AsyncEventsAzure\\": "MageOS/AsyncEventsAzure/",
@@ -22,6 +30,5 @@
     },
     "require-dev": {
         "symplify/monorepo-builder": "^11.2"
-    },
-    "minimum-stability": "beta"
+    }
 }
