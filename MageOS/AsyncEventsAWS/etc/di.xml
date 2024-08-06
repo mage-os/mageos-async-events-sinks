@@ -9,4 +9,8 @@
             </argument>
         </arguments>
     </type>
+    
+    <type name="MageOS\AsyncEventsAdminUi\Ui\Source\Notifiers">
+        <plugin name="mageos_async_events_aws" type="MageOS\AsyncEventsAWS\Plugin\MageOS\AsyncEventsAdminUi\UiSourceNotifiers" sortOrder="1" disabled="false" />
+      </type>
 </config>
