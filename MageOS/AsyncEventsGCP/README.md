@@ -5,7 +5,7 @@ GCP event sinks for [mageos-async-events](https://github.com/mage-os/mageos-asyn
 ## Installation
 
 ```sh
-composer require mage-os/mageos-async-events-aws
+composer require mage-os/mageos-async-events-gcp
 ```
 
 ## Authenticating with Google Cloud Client Libraries

@@ -9,3 +9,7 @@ instructions please refer to the individual package's repository.
 [mageos-async-events-aws](https://github.com/mage-os/mageos-async-events-aws)
 * EventBridge
 * SQS
+
+### GCP
+[mageos-async-events-gcp](https://github.com/mage-os/mageos-async-events-gcp)
+* Pub/Sub
