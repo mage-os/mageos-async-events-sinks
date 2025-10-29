@@ -8,7 +8,7 @@ class UiSourceNotifiers
     public function afterToOptionArray(Subject $subject, $result)
     {
         $result[] = [
-            'value' => 'event_bridge',
+            'value' => 'eventbridge',
             'label' => 'AWS Event Bridge',
         ];
         return $result;
