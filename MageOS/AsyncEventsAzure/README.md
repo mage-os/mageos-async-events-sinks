@@ -23,6 +23,13 @@ Under `Stores -> Services -> Async Events Azure` set the `Tenant ID`,
 
 ### Azure Event Grid
 
+This module provides an event sink for Azure Event Grid. This allows you to relay
+events into Azure Event Grid, enabling you to integrate with other Azure
+services or third-party applications that support Event Grid.
+
+The Event Grid topic must use the CloudEvents schema. Events are sent in the
+structured content mode of CloudEvents.
+
 **Create an Event Grid Subscription**
 
 The following is an example to create an Event Grid subscription for the `example.event`
