@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace MageOS\AsyncEventsAzure\Service;
 
-use CloudEvents\Serializers\JsonSerializer;
-use CloudEvents\Serializers\Normalizers\V1\Normalizer;
-use CloudEvents\V1\CloudEventImmutable;
-use finfo;
-use Magento\Framework\Encryption\EncryptorInterface;
-use Magento\Framework\Serialize\SerializerInterface;
 use MageOS\AsyncEvents\Api\Data\AsyncEventInterface;
 use MageOS\AsyncEvents\Api\Data\ResultInterface;
 use MageOS\AsyncEvents\Helper\NotifierResult;
 use MageOS\AsyncEvents\Service\AsyncEvent\NotifierInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
+use MageOS\AsyncEventsAzure\Model\EntraToken;
+use CloudEvents\Serializers\JsonSerializer;
+use CloudEvents\Serializers\Normalizers\V1\Normalizer;
+use CloudEvents\V1\CloudEventImmutable;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ConnectException;
@@ -23,15 +20,13 @@ class EventGrid implements NotifierInterface
 {
     /**
      * @param Normalizer $normalizer
-     * @param EncryptorInterface $encryptor
-     * @param SerializerInterface $serializer
+     * @param HttpClient $httpClient,
+     * @param EntraToken $entraToken
      */
     public function __construct(
         private readonly Normalizer $normalizer,
-        private readonly EncryptorInterface $encryptor,
-        private readonly SerializerInterface $serializer,
-        private readonly ScopeConfigInterface $scopeConfig,
         private readonly HttpClient $httpClient,
+        private readonly EntraToken $entraToken
     ) {}
 
     /**
@@ -45,21 +40,7 @@ class EventGrid implements NotifierInterface
         $result->setIsRetryable(false);
         $result->setIsSuccessful(false);
 
-        $tenantId = $this->scopeConfig->getValue("async_events_azure/service_principal/tenant_id");
-        $clientId = $this->scopeConfig->getValue("async_events_azure/service_principal/client_id");
-        $clientSecret = $this->scopeConfig->getValue("async_events_azure/service_principal/client_secret");
-
-        $response = $this->httpClient->post("https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token", [
-            "form_params" => [
-                "client_id" => $clientId,
-                "client_secret" => $this->encryptor->decrypt($clientSecret),
-                "scope" => "https://eventgrid.azure.net/.default",
-                "grant_type" => "client_credentials"
-            ]
-        ]);
-
-        // TODO: cache access token
-        $accessToken = json_decode($response->getBody()->getContents(), true)["access_token"];
+        $accessToken = $this->entraToken->get("https://eventgrid.azure.net/.default");
 
         try {
             $response = $this->httpClient->post($asyncEvent->getRecipientUrl(), [
@@ -74,7 +55,6 @@ class EventGrid implements NotifierInterface
             ]);
 
             $result->setIsSuccessful(true);
-
         } catch (RequestException $exception) {
 
             $result->setIsSuccessful(false);
