@@ -19,6 +19,16 @@ Configure OAuth parameters in the Magento admin panel.
 Under `Stores -> Services -> Async Events Azure` set the `Tenant ID`,
 `Client ID` and the `Client Secret`.
 
+## Best Practices
+
+- Create a resource group for Magento and assign RBAC permissions to the service
+  principal at the resource group level.
+- Create a separate Event Grid topic for each Magento website.
+- For further filtering such as based on magento stores or event types, use
+  Azure Event Grid's advanced filtering capabilities.
+
+![Azure Best Practice](./best-practice-azure-design.png)
+
 ## Azure event sinks
 
 ### Azure Event Grid
