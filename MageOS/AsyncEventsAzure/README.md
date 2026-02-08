@@ -52,7 +52,7 @@ curl --location --request POST 'https://test.mageos.dev/rest/V1/async_event' \
     "asyncEvent": {
         "event_name": "example.event",
         "recipient_url": "Event Grid Topic Endpoint",
-        "verification_token": "supersecret", // not used by this sink but required by the API
+        "verification_token": "secret",
         "metadata": "eventgrid"
     }
 }'

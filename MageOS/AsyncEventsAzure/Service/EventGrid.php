@@ -20,7 +20,7 @@ class EventGrid implements NotifierInterface
 {
     /**
      * @param Normalizer $normalizer
-     * @param HttpClient $httpClient,
+     * @param HttpClient $httpClient
      * @param EntraToken $entraToken
      */
     public function __construct(
@@ -40,9 +40,10 @@ class EventGrid implements NotifierInterface
         $result->setIsRetryable(false);
         $result->setIsSuccessful(false);
 
-        $accessToken = $this->entraToken->get("https://eventgrid.azure.net/.default");
 
         try {
+            $accessToken = $this->entraToken->get("https://eventgrid.azure.net/.default");
+
             $response = $this->httpClient->post($asyncEvent->getRecipientUrl(), [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $accessToken,
@@ -83,6 +84,10 @@ class EventGrid implements NotifierInterface
             $result->setIsSuccessful(false);
             $result->setResponseData($exception->getMessage());
             $result->setIsRetryable(true);
+        } catch (\RuntimeException $exception) {
+            $result->setIsRetryable(false);
+            $result->setIsSuccessful(false);
+            $result->setResponseData($exception->getMessage());
         }
 
         return $result;
