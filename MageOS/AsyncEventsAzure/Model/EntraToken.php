@@ -29,13 +29,12 @@ class EntraToken
         $clientId = $this->scopeConfig->getValue("async_events_azure/service_principal/client_id");
         $clientSecret = $this->scopeConfig->getValue("async_events_azure/service_principal/client_secret");
 
-        $cacheKey = "azure_api_token_" . md5($scope);
-
-        $accessToken = $accessToken = $this->cache->load($cacheKey);
-
         if ($tenantId === null || $clientId === null || $clientSecret === null) {
             throw new \RuntimeException("Missing Azure service principal configuration.");
         }
+
+        $cacheKey = "azure_api_token_" . md5($scope);
+        $accessToken = $this->cache->load($cacheKey);
 
         if (!$accessToken) {
             $response = $this->httpClient->post("https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token", [
