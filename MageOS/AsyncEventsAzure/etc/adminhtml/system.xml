@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="async_events_azure" showInDefault="1">
+            <label>Async Events Azure</label>
+            <tab>service</tab>
+            <resource>Magento_Webapi::config_webapi</resource>
+
+            <group id="service_principal" translate="label" type="text" sortOrder="1" showInDefault="1">
+                <label>Service Principal</label>
+
+                <field id="tenant_id" type="text" sortOrder="1" showInDefault="1">
+                    <label>Tenant ID</label>
+                </field>
+
+                <field id="client_id" type="text" sortOrder="2" showInDefault="1">
+                    <label>Client ID</label>
+                </field>
+
+                <field id="client_secret" type="obscure" sortOrder="3" showInDefault="1">
+                    <label>Client Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

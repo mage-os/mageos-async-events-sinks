@@ -21,8 +21,8 @@ jobs:
           - local_path: 'AsyncEventsAWS'
             split_repository: 'mageos-async-events-aws'
 
-#          - local_path: 'AsyncEventsAzure'
-#            split_repository: 'mageos-async-events-azure'
+          - local_path: 'AsyncEventsAzure'
+            split_repository: 'mageos-async-events-azure'
 
           - local_path: 'AsyncEventsGCP'
             split_repository: 'mageos-async-events-gcp'
